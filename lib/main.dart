@@ -4,6 +4,7 @@ import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
 import 'package:proto_ikan/repository/repositories.dart';
 import 'package:proto_ikan/screen/home_screen.dart';
 import 'package:proto_ikan/screen/login_screen.dart';
+import 'package:proto_ikan/screen/main_screen.dart';
 
 class SimpleBlocObserver extends BlocObserver {
   @override
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
           if (state is AuthenticationAuthenticated) {
-            return const HomePage();
+            return const MainScreen();
           }
           if (state is AuthenticationUnauthenticated) {
             return LoginScreen(userRepository: userRepository);

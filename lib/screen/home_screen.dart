@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
+import 'package:proto_ikan/widget/drawer.dart';
 import 'package:proto_ikan/widget/home_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,14 +25,8 @@ class _HomePageState extends State<HomePage> {
               );
             },
           ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
-                },
-                icon: const Icon(Icons.logout))
-          ],
         ),
+        drawer: const Drawer(child: DrawerWidget()),
         body: const HomeWidget());
   }
 }
