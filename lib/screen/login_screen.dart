@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
 import 'package:proto_ikan/bloc/login_bloc/login_bloc.dart';
+import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
 import 'package:proto_ikan/repository/repositories.dart';
 import 'package:proto_ikan/widget/login_widget.dart';
 
@@ -21,6 +22,7 @@ class LoginScreen extends StatelessWidget {
           return LoginBloc(
             authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
             userRepository: userRepository,
+            userBloc: BlocProvider.of<UserBloc>(context),
           );
         },
         child: LoginWidget(

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
+import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
+import 'package:proto_ikan/model/user_model.dart';
 import 'package:proto_ikan/repository/repositories.dart';
-import 'package:proto_ikan/screen/home_screen.dart';
 import 'package:proto_ikan/screen/login_screen.dart';
 import 'package:proto_ikan/screen/main_screen.dart';
 
@@ -29,12 +30,20 @@ class SimpleBlocObserver extends BlocObserver {
 void main() {
   Bloc.observer = SimpleBlocObserver();
   final userRepository = UserRepository();
+  final user = User();
   runApp(
-    BlocProvider<AuthenticationBloc>(
-      create: (context) {
-        return AuthenticationBloc(userRepository: userRepository)
-          ..add(AppStarted());
-      },
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthenticationBloc>(
+          create: (context) {
+            return AuthenticationBloc(userRepository: userRepository)
+              ..add(AppStarted());
+          },
+        ),
+        BlocProvider<UserBloc>(
+          create: (context) => UserBloc(user, userRepository),
+        ),
+      ],
       child: MyApp(userRepository: userRepository),
     ),
   );

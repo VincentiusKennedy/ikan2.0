@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:proto_ikan/model/user_model.dart';
 
 class UserRepository {
   static String mainUrl =
@@ -48,6 +49,21 @@ class UserRepository {
       final errorBody = json.decode(response.body);
       final errorMessage = errorBody['message'];
       throw Exception(errorMessage ?? "Failed to login");
+    }
+  }
+
+  Future<User> getUserData(String token) async {
+    final response = await http.get(Uri.parse('$mainUrl/me'), headers: {
+      'Authorization': 'Bearer $token',
+    });
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body)['data'];
+      final user = User.fromJson(responseData['user']);
+      print('HALO ${user.name}');
+      return user;
+    } else {
+      throw Exception("Failed to get user data");
     }
   }
 }
