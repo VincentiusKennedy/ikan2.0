@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proto_ikan/bloc/login_bloc/login_bloc.dart';
-import 'package:proto_ikan/repository/repositories.dart';
+import 'package:proto_ikan/repository/login_repositories.dart';
 
 class LoginWidget extends StatefulWidget {
   final UserRepository userRepository;
@@ -21,7 +21,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
-    _onLoginButtonPressed() {
+    onLoginButtonPressed() {
       BlocProvider.of<LoginBloc>(context).add(
         LoginButtonPressed(
           email: _emailController.text,
@@ -69,7 +69,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: _onLoginButtonPressed,
+                  onPressed: onLoginButtonPressed,
                   child: const Text('Login'),
                 ),
               ],

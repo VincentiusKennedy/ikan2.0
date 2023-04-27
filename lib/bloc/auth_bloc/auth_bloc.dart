@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:proto_ikan/repository/repositories.dart';
+import 'package:proto_ikan/repository/login_repositories.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

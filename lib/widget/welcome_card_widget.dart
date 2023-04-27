@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proto_ikan/bloc/login_bloc/login_bloc.dart';
 import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
 import 'package:proto_ikan/model/user_model.dart';
 
-class HomeWidget extends StatelessWidget {
-  const HomeWidget({Key? key});
+class WelcomeCard extends StatelessWidget {
+  const WelcomeCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(
       bloc: context.read<UserBloc>(),
       builder: (context, state) {
-        if (state is UserLoaded) {
+        if (state is UserLoading) {
+          return const CircularProgressIndicator();
+        } else if (state is UserLoaded) {
           User userData = state.user;
           return Card(
             margin: const EdgeInsets.all(10),
@@ -26,8 +27,8 @@ class HomeWidget extends StatelessWidget {
                   leading:
                       const Icon(Icons.album, color: Colors.cyan, size: 45),
                   title: Text(
-                    'Selamat Datang ${userData.name ?? 'KOSONG'}!',
-                    style: TextStyle(fontSize: 20),
+                    'Selamat Datang ${userData.name ?? 'User'} !',
+                    style: const TextStyle(fontSize: 20),
                   ),
                   subtitle: const Text('Modern Talking Album'),
                   trailing: IconButton(
@@ -39,7 +40,7 @@ class HomeWidget extends StatelessWidget {
             ),
           );
         } else {
-          return Container();
+          return const Text('FATAL ERROR (WELCOME CARD)');
         }
       },
     );

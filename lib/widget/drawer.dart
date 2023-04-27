@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -8,8 +10,8 @@ class DrawerWidget extends StatelessWidget {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
-        children: const [
-          UserAccountsDrawerHeader(
+        children: [
+          const UserAccountsDrawerHeader(
             accountName: Text("USER"),
             accountEmail: Text("user@gmail.com"),
             currentAccountPicture: CircleAvatar(
@@ -18,16 +20,13 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text("Account"),
-            subtitle: Text("Personal"),
-            trailing: Icon(Icons.edit),
-          ),
-          ListTile(
-            leading: Icon(Icons.email),
-            title: Text("Email"),
-            subtitle: Text("user@gmail.com"),
-            trailing: Icon(Icons.send),
+            leading: const Icon(Icons.account_circle),
+            title: const Text("Logout"),
+            subtitle: const Text("Keluar dari akun anda"),
+            trailing: const Icon(Icons.logout),
+            onTap: () {
+              BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+            },
           ),
         ],
       ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
+import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
 import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
 import 'package:proto_ikan/model/user_model.dart';
-import 'package:proto_ikan/repository/repositories.dart';
+import 'package:proto_ikan/repository/fish_list_repositories.dart';
+import 'package:proto_ikan/repository/login_repositories.dart';
 import 'package:proto_ikan/screen/login_screen.dart';
 import 'package:proto_ikan/screen/main_screen.dart';
 
@@ -30,7 +32,7 @@ class SimpleBlocObserver extends BlocObserver {
 void main() {
   Bloc.observer = SimpleBlocObserver();
   final userRepository = UserRepository();
-  final user = User();
+  final fishListRepository = FishListRepository();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -41,7 +43,11 @@ void main() {
           },
         ),
         BlocProvider<UserBloc>(
-          create: (context) => UserBloc(userRepository),
+          create: (context) => UserBloc(userRepository: userRepository),
+        ),
+        BlocProvider<FishListBloc>(
+          create: (context) =>
+              FishListBloc(fishListRepository: fishListRepository),
         ),
       ],
       child: MyApp(userRepository: userRepository),
