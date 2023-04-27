@@ -7,13 +7,11 @@ part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  final User user;
   final UserRepository userRepository;
 
-  UserBloc(this.user, this.userRepository) : super(UserInitial(User())) {
-    // on<GettingUser>((event, emit) async {
-    // emit(UserGet());
-    // await userRepository.getUserData(event.user);
-    // });
+  UserBloc(this.userRepository) : super(UserInitial()) {
+    on<GettingUser>((event, emit) {
+      emit(UserLoaded(event.user));
+    });
   }
 }

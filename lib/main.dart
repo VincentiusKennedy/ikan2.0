@@ -41,7 +41,7 @@ void main() {
           },
         ),
         BlocProvider<UserBloc>(
-          create: (context) => UserBloc(user, userRepository),
+          create: (context) => UserBloc(userRepository),
         ),
       ],
       child: MyApp(userRepository: userRepository),
