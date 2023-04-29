@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
 import 'package:proto_ikan/model/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomeCard extends StatelessWidget {
-  const WelcomeCard({super.key});
+  const WelcomeCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

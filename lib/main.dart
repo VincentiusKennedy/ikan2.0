@@ -33,12 +33,14 @@ void main() {
   Bloc.observer = SimpleBlocObserver();
   final userRepository = UserRepository();
   final fishListRepository = FishListRepository();
+  final userBloc = UserBloc(userRepository: userRepository);
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider<AuthenticationBloc>(
           create: (context) {
-            return AuthenticationBloc(userRepository: userRepository)
+            return AuthenticationBloc(
+                userRepository: userRepository, userBloc: userBloc)
               ..add(AppStarted());
           },
         ),

@@ -1,18 +1,60 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:proto_ikan/model/user_model.dart';
 import 'package:proto_ikan/repository/login_repositories.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository userRepository;
+  late SharedPreferences prefs;
 
   UserBloc({required this.userRepository}) : super(UserInitial()) {
-    on<GettingUser>((event, emit) async {
+    // inisialisasi prefs saat pembuatan instance UserBloc
+    _initPrefs();
+
+    on<GetUser>((event, emit) {
       emit(UserLoading());
-      emit(UserLoaded(event.user));
+      try {
+        final userDataString = prefs.getString('userData');
+        if (userDataString != null) {
+          final userDataJson = jsonDecode(userDataString);
+          final userData = User.fromJson(userDataJson);
+          emit(UserLoaded(userData));
+        } else {
+          emit(UserEmpty());
+        }
+      } catch (e) {
+        emit(UserError('Error: $e'));
+      }
     });
+
+    on<SaveUser>((event, emit) async {
+      emit(UserLoading());
+      try {
+        await prefs.setString('userData', jsonEncode(event.user.toJson()));
+        emit(UserLoaded(event.user));
+      } catch (e) {
+        emit(UserError('Error: $e'));
+      }
+    });
+
+    on<ClearUser>((event, emit) async {
+      emit(UserLoading());
+      try {
+        await prefs.remove('userData');
+        emit(UserEmpty());
+      } catch (e) {
+        emit(UserError('Error: $e'));
+      }
+    });
+  }
+
+  Future<void> _initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
   }
 }

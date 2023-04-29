@@ -14,7 +14,7 @@ class FishListBloc extends Bloc<FishListEvent, FishListState> {
       emit(FishListLoading());
       try {
         final fishList = await fishListRepository.getFishListData();
-        print(fishList);
+        // print(fishList);
         emit(FishListLoadSuccess(fishList));
       } catch (error) {
         emit(FishListLoadFailure(error: error.toString()));

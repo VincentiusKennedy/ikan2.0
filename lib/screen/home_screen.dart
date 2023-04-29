@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     context.read<FishListBloc>().add(GetFishList());
-    context.read<UserBloc>().add(GettingUser(user: User()));
+    context.read<UserBloc>().add(GetUser());
   }
 
   @override

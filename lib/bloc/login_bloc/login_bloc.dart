@@ -2,7 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
 import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
+import 'package:proto_ikan/model/user_model.dart';
 import 'package:proto_ikan/repository/login_repositories.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -11,12 +13,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository userRepository;
   final AuthenticationBloc authenticationBloc;
   final UserBloc userBloc;
+  late SharedPreferences prefs;
 
   LoginBloc({
     required this.userRepository,
     required this.authenticationBloc,
     required this.userBloc,
   }) : super(LoginInitial()) {
+    // inisialisasi prefs saat pembuatan instance LoginBloc
+    _initPrefs();
     on<LoginButtonPressed>((event, emit) async {
       emit(LoginLoading());
       try {
@@ -24,11 +29,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         authenticationBloc.add(LoggedIn(token: token));
         final user = await userRepository.getUserData(token);
         print('INI DARI LOGIN BLOC ${user.email}');
-        userBloc.add(GettingUser(user: user));
+        userBloc.add(SaveUser(user));
         emit(LoginInitial());
       } catch (error) {
         emit(LoginFailure(error: error.toString()));
       }
     });
+  }
+
+  Future<void> _initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
   }
 }
