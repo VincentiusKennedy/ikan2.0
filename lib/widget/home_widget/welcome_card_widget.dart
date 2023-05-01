@@ -20,21 +20,26 @@ class WelcomeCard extends StatelessWidget {
             margin: const EdgeInsets.all(10),
             color: Colors.green[100],
             shadowColor: Colors.blueGrey,
-            elevation: 10,
+            elevation: 1,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 ListTile(
-                  leading:
-                      const Icon(Icons.album, color: Colors.cyan, size: 45),
-                  title: Text(
-                    'Selamat Datang ${userData.name ?? 'User'} !',
-                    style: const TextStyle(fontSize: 20),
+                  leading: const Icon(
+                    Icons.account_circle,
+                    color: Colors.cyan,
+                    size: 60,
                   ),
-                  subtitle: const Text('Modern Talking Album'),
-                  trailing: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.notification_add),
+                  title: const Text(
+                    'Selamat Datang',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  subtitle: Text(' ${userData.name ?? 'User'}'),
+                  trailing: CircleAvatar(
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.notification_add_outlined),
+                    ),
                   ),
                 ),
               ],

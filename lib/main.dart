@@ -30,6 +30,7 @@ class SimpleBlocObserver extends BlocObserver {
 }
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserver();
   final userRepository = UserRepository();
   final fishListRepository = FishListRepository();

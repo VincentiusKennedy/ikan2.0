@@ -1,2 +1,1 @@
 List Bug Yang Ditemui Sejauh ini :
-1. WelcomeCard kalo di restart appnya, nilai usernya jadi kosong, sedangkan kalo login pertama kali masih ada sepertinya harus disimpan di device untuk isi datanya
