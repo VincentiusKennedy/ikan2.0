@@ -1,2 +1,2 @@
 List Bug Yang Ditemui Sejauh ini :
-1. Kalo semisal di API ada perubahan data atau waktu, aplikasi nya mati dan tidak dibuka lagi maka, waktu yang diubah di API tidak akan terapply di aplikasinya, kalo mau di apply harus dibuka lagi karena saat dibuka dia fetch api ulang
+1. Kalo semisal di API ada perubahan data atau waktu, aplikasi nya mati dan tidak dibuka lagi, maka waktu yang diubah di API tidak akan terapply di aplikasinya, kalo mau di apply harus dibuka lagi karena saat dibuka dia fetch api ulang dan memanggil fungsi notifnya lagi
