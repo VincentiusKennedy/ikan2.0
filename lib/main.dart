@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
 import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
 import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
@@ -29,8 +30,21 @@ class SimpleBlocObserver extends BlocObserver {
   }
 }
 
-void main() {
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+const AndroidInitializationSettings initializationSettingsAndroid =
+    AndroidInitializationSettings('app_icon');
+
+const InitializationSettings initializationSettings = InitializationSettings(
+  android: initializationSettingsAndroid,
+);
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) {});
+
   Bloc.observer = SimpleBlocObserver();
   final userRepository = UserRepository();
   final fishListRepository = FishListRepository();

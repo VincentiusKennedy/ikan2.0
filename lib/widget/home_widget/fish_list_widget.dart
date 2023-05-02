@@ -22,18 +22,19 @@ class FishListWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 decoration: const BoxDecoration(color: Colors.white),
                 child: SkeletonItem(
-                    child: Column(
-                  children: [
-                    const SizedBox(height: 12),
-                    SkeletonAvatar(
-                      style: SkeletonAvatarStyle(
-                        width: double.infinity,
-                        minHeight: MediaQuery.of(context).size.height / 8,
-                        maxHeight: MediaQuery.of(context).size.height / 3,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 12),
+                      SkeletonAvatar(
+                        style: SkeletonAvatarStyle(
+                          width: double.infinity,
+                          minHeight: MediaQuery.of(context).size.height / 8,
+                          maxHeight: MediaQuery.of(context).size.height / 3,
+                        ),
                       ),
-                    ),
-                  ],
-                )),
+                    ],
+                  ),
+                ),
               ),
             ),
           );

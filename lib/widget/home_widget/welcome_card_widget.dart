@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
 import 'package:proto_ikan/model/user_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:proto_ikan/utils/notification_utils.dart';
 
 class WelcomeCard extends StatelessWidget {
   const WelcomeCard({Key? key}) : super(key: key);
@@ -35,10 +35,10 @@ class WelcomeCard extends StatelessWidget {
                     style: TextStyle(fontSize: 20),
                   ),
                   subtitle: Text(' ${userData.name ?? 'User'}'),
-                  trailing: CircleAvatar(
+                  trailing: const CircleAvatar(
                     child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.notification_add_outlined),
+                      onPressed: permission,
+                      icon: Icon(Icons.notification_add_outlined),
                     ),
                   ),
                 ),

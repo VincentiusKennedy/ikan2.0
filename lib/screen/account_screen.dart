@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
+import 'package:proto_ikan/widget/account_screen_widget/notification_test_widget.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -18,6 +19,7 @@ class AccountScreen extends StatelessWidget {
               icon: const Icon(Icons.logout))
         ],
       ),
+      body: const Center(child: NotificationTestWidget()),
     );
   }
 }
