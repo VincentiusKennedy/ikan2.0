@@ -24,7 +24,7 @@ class FishList {
     detail = json['detail'];
     picture = json['picture'];
     location = json['location'];
-    date = json['date'];
+    date = (json['date']);
     price = json['price'];
     status = json['status'];
     id = json['id'];

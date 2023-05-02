@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
+import 'package:proto_ikan/utils/schedulled_notif.dart';
 import 'package:skeletons/skeletons.dart';
 
 class FishListWidget extends StatelessWidget {

@@ -4,11 +4,12 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
 import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
 import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
-import 'package:proto_ikan/model/user_model.dart';
 import 'package:proto_ikan/repository/fish_list_repositories.dart';
 import 'package:proto_ikan/repository/login_repositories.dart';
 import 'package:proto_ikan/screen/login_screen.dart';
 import 'package:proto_ikan/screen/main_screen.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class SimpleBlocObserver extends BlocObserver {
   @override
@@ -39,11 +40,25 @@ const InitializationSettings initializationSettings = InitializationSettings(
   android: initializationSettingsAndroid,
 );
 
+Future<void> initNotifications() async {
+  // You can customize the notification settings here
+  final AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('app_icon');
+  final InitializationSettings initializationSettings =
+      InitializationSettings(android: initializationSettingsAndroid);
+
+  flutterLocalNotificationsPlugin.initialize(initializationSettings);
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  tz.initializeTimeZones();
+
   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse response) {});
+
+  await initNotifications();
 
   Bloc.observer = SimpleBlocObserver();
   final userRepository = UserRepository();

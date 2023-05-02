@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:proto_ikan/model/fish_list_model.dart';
+import 'package:proto_ikan/utils/notification_utils.dart';
+import 'package:proto_ikan/utils/schedulled_notif.dart';
 
 class FishListRepository {
   final _baseUrl = 'https://6430fd953adb159651639c30.mockapi.io';
@@ -14,6 +16,7 @@ class FishListRepository {
         print(response.body);
         Iterable it = jsonDecode(response.body);
         List<FishList> fishList = it.map((e) => FishList.fromJson(e)).toList();
+        scheduleNotification(fishList);
         return fishList;
       }
     } catch (e) {

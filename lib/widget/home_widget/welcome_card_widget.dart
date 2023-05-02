@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
 import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
 import 'package:proto_ikan/model/user_model.dart';
 import 'package:proto_ikan/utils/notification_utils.dart';
+import 'package:proto_ikan/utils/schedulled_notif.dart';
 
 class WelcomeCard extends StatelessWidget {
   const WelcomeCard({Key? key}) : super(key: key);
@@ -35,10 +37,23 @@ class WelcomeCard extends StatelessWidget {
                     style: TextStyle(fontSize: 20),
                   ),
                   subtitle: Text(' ${userData.name ?? 'User'}'),
-                  trailing: const CircleAvatar(
-                    child: IconButton(
-                      onPressed: permission,
-                      icon: Icon(Icons.notification_add_outlined),
+                  trailing: CircleAvatar(
+                    child: BlocBuilder<FishListBloc, FishListState>(
+                      bloc: context.read<FishListBloc>(),
+                      builder: (context, state) {
+                        if (state is FishListLoadSuccess) {
+                          final fishList = state.fishList;
+                          return IconButton(
+                            onPressed: () {
+                              permission();
+                              scheduleNotification(fishList);
+                            },
+                            icon: const Icon(Icons.notification_add_outlined),
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
                     ),
                   ),
                 ),

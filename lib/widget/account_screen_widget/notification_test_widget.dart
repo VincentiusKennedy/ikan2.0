@@ -7,6 +7,8 @@ class NotificationTestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ElevatedButton(
-        onPressed: postNotification, child: Text('TEST'));
+      onPressed: postNotification,
+      child: Text('TEST'),
+    );
   }
 }
