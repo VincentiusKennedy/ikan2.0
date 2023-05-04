@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
 import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
 import 'package:proto_ikan/widget/drawer.dart';
-import 'package:proto_ikan/widget/home_widget/dashboard_widget.dart';
-import 'package:proto_ikan/widget/home_widget/fish_list_widget.dart';
-import 'package:proto_ikan/widget/home_widget/welcome_card_widget.dart';
+import 'package:proto_ikan/widget/home_screen_widget/dashboard_widget.dart';
+import 'package:proto_ikan/widget/home_screen_widget/fish_list_widget.dart';
+import 'package:proto_ikan/widget/home_screen_widget/welcome_card_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

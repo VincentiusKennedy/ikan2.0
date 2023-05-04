@@ -6,6 +6,7 @@ import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
 import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
 import 'package:proto_ikan/repository/fish_list_repositories.dart';
 import 'package:proto_ikan/repository/login_repositories.dart';
+import 'package:proto_ikan/screen/jadwal_screen.dart';
 import 'package:proto_ikan/screen/login_screen.dart';
 import 'package:proto_ikan/screen/main_screen.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -103,7 +104,9 @@ class MyApp extends StatelessWidget {
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
           if (state is AuthenticationAuthenticated) {
-            return const MainScreen();
+            return const MainScreen(
+              indexScreen: 0,
+            );
           }
           if (state is AuthenticationUnauthenticated) {
             return LoginScreen(userRepository: userRepository);

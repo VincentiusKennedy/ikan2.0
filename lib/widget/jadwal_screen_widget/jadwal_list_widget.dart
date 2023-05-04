@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
-import 'package:proto_ikan/utils/schedulled_notif.dart';
+import 'package:proto_ikan/screen/fish_detaill.dart';
 import 'package:skeletons/skeletons.dart';
 
-class FishListWidget extends StatelessWidget {
-  const FishListWidget({super.key});
+class JadwalWidget extends StatelessWidget {
+  const JadwalWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +82,33 @@ class FishListWidget extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
+                      child: Text('Harga Dasar : RP.${fish.price} / Kg'),
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.location_on_outlined),
+                        Text(fish.location)
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.access_time_rounded),
+                        Text(fish.date),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
                         width: double.infinity,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    FishDetailScreen(id: fish.id),
+                              ),
+                            );
+                          },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                                 const Color.fromARGB(255, 114, 155, 194)),
@@ -93,7 +116,7 @@ class FishListWidget extends StatelessWidget {
                                 const Size(double.infinity, 48.0)),
                           ),
                           child: const Text(
-                            'Lihat Jadwal',
+                            'Lihat Produk',
                             style: TextStyle(
                               color: Colors.white,
                             ),

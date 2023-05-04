@@ -19,7 +19,9 @@ class AccountScreen extends StatelessWidget {
               icon: const Icon(Icons.logout))
         ],
       ),
-      body: const Center(child: NotificationTestWidget()),
+      body: const Center(
+        child: NotificationTestWidget(),
+      ),
     );
   }
 }
