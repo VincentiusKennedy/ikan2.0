@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:proto_ikan/model/user_model.dart';
-import 'package:proto_ikan/repository/login_repositories.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../model/user_model.dart';
+import '../../repository/login_repositories.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';

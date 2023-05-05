@@ -1,13 +1,13 @@
-
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:proto_ikan/model/user_model.dart';
+
+import '../model/user_model.dart';
 
 class UserRepository {
   static String mainUrl =
-      Platform.isAndroid ? 'http://192.168.1.6:3000' : 'http://localhost:3000';
+      Platform.isAndroid ? 'http://192.168.1.7:3000' : 'http://localhost:3000';
   var loginUrl = '$mainUrl/signin';
 
   final FlutterSecureStorage storage = const FlutterSecureStorage();
@@ -61,7 +61,7 @@ class UserRepository {
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body)['data'];
       final user = User.fromJson(responseData['user']);
-      print('HALO ${user.name}');
+      // print('HALO ${user.name}');
       return user;
     } else {
       throw Exception("Failed to get user data");

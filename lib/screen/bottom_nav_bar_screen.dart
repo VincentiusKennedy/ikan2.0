@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:proto_ikan/screen/account_screen.dart';
-import 'package:proto_ikan/screen/home_screen.dart';
-import 'package:proto_ikan/screen/jadwal_screen.dart';
 
-class MainScreen extends StatefulWidget {
+import 'main_screen/account_screen.dart';
+import 'main_screen/home_screen.dart';
+import 'main_screen/jadwal_screen.dart';
+
+class BottomNavBarScreen extends StatefulWidget {
   final int indexScreen;
 
-  const MainScreen({required this.indexScreen, super.key});
+  const BottomNavBarScreen({required this.indexScreen, super.key});
 
   @override
-  State<MainScreen> createState() =>
-      _MainScreenState(bottomNavIndex: indexScreen);
+  State<BottomNavBarScreen> createState() =>
+      _BottomNavBarScreenState(bottomNavIndex: indexScreen);
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   int bottomNavIndex;
-  _MainScreenState({required this.bottomNavIndex});
+  _BottomNavBarScreenState({required this.bottomNavIndex});
 
   final List<Widget> _listWidget = [
     const HomePage(),

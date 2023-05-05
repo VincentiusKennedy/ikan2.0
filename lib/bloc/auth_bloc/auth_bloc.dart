@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
-import 'package:proto_ikan/repository/login_repositories.dart';
+
+import '../../repository/login_repositories.dart';
+import '../user_bloc/user_bloc.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

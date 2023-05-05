@@ -1,11 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
-import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
-import 'package:proto_ikan/widget/home_screen_widget/welcome_card_widget.dart';
-import 'package:proto_ikan/widget/jadwal_screen_widget/jadwal_list_widget.dart';
+import '../../bloc/fish/fish_bloc.dart';
+import '../../bloc/user_bloc/user_bloc.dart';
+import '../../widget/home_screen_widget/welcome_card_widget.dart';
+import '../../widget/jadwal_screen_widget/jadwal_list_widget.dart';
 
 class JadwalScreen extends StatefulWidget {
   const JadwalScreen({Key? key}) : super(key: key);
@@ -18,7 +17,7 @@ class _JadwalScreen extends State<JadwalScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<FishListBloc>().add(GetFishList());
+    context.read<FishBloc>().add(GetFish());
     context.read<UserBloc>().add(GetUser());
   }
 

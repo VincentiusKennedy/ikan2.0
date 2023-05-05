@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
-import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
-import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
-import 'package:proto_ikan/repository/fish_list_repositories.dart';
-import 'package:proto_ikan/repository/login_repositories.dart';
-import 'package:proto_ikan/screen/jadwal_screen.dart';
-import 'package:proto_ikan/screen/login_screen.dart';
-import 'package:proto_ikan/screen/main_screen.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
+
+import 'bloc/auth_bloc/auth_bloc.dart';
+import 'bloc/fish/fish_bloc.dart';
+import 'bloc/user_bloc/user_bloc.dart';
+import 'repository/fish_repositories.dart';
+import 'repository/login_repositories.dart';
+import 'screen/login_screen.dart';
+import 'screen/bottom_nav_bar_screen.dart';
 
 class SimpleBlocObserver extends BlocObserver {
-  @override
-  void onChange(BlocBase bloc, Change change) {
-    super.onChange(bloc, change);
-    print('${bloc.runtimeType} $change');
-  }
+  // @override
+  // void onChange(BlocBase bloc, Change change) {
+  //   super.onChange(bloc, change);
+  //   print('${bloc.runtimeType} $change');
+  // }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
@@ -42,10 +41,9 @@ const InitializationSettings initializationSettings = InitializationSettings(
 );
 
 Future<void> initNotifications() async {
-  // You can customize the notification settings here
-  final AndroidInitializationSettings initializationSettingsAndroid =
+  const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('app_icon');
-  final InitializationSettings initializationSettings =
+  const InitializationSettings initializationSettings =
       InitializationSettings(android: initializationSettingsAndroid);
 
   flutterLocalNotificationsPlugin.initialize(initializationSettings);
@@ -63,7 +61,7 @@ Future<void> main() async {
 
   Bloc.observer = SimpleBlocObserver();
   final userRepository = UserRepository();
-  final fishListRepository = FishListRepository();
+  final fishListRepository = FishRepository();
   final userBloc = UserBloc(userRepository: userRepository);
   runApp(
     MultiBlocProvider(
@@ -78,9 +76,8 @@ Future<void> main() async {
         BlocProvider<UserBloc>(
           create: (context) => UserBloc(userRepository: userRepository),
         ),
-        BlocProvider<FishListBloc>(
-          create: (context) =>
-              FishListBloc(fishListRepository: fishListRepository),
+        BlocProvider<FishBloc>(
+          create: (context) => FishBloc(fishRepository: fishListRepository),
         ),
       ],
       child: MyApp(userRepository: userRepository),
@@ -104,7 +101,7 @@ class MyApp extends StatelessWidget {
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
           if (state is AuthenticationAuthenticated) {
-            return const MainScreen(
+            return const BottomNavBarScreen(
               indexScreen: 0,
             );
           }

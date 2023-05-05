@@ -1,11 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
-import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
-import 'package:proto_ikan/model/user_model.dart';
-import 'package:proto_ikan/utils/notification_utils.dart';
-import 'package:proto_ikan/utils/schedulled_notif.dart';
+
+import '../../bloc/fish/fish_bloc.dart';
+import '../../bloc/user_bloc/user_bloc.dart';
+import '../../model/user_model.dart';
+import '../../utils/notification_utils.dart';
+import '../../utils/schedulled_notif.dart';
 
 class WelcomeCard extends StatelessWidget {
   const WelcomeCard({Key? key}) : super(key: key);
@@ -39,15 +39,15 @@ class WelcomeCard extends StatelessWidget {
                   ),
                   subtitle: Text(' ${userData.name ?? 'User'}'),
                   trailing: CircleAvatar(
-                    child: BlocBuilder<FishListBloc, FishListState>(
-                      bloc: context.read<FishListBloc>(),
+                    child: BlocBuilder<FishBloc, FishState>(
+                      bloc: context.read<FishBloc>(),
                       builder: (context, state) {
-                        if (state is FishListLoadSuccess) {
-                          final fishList = state.fishList;
+                        if (state is FishLoadSuccess) {
+                          final fish = state.fish;
                           return IconButton(
                             onPressed: () {
                               permission();
-                              scheduleNotification(fishList);
+                              scheduleNotification(fish);
                             },
                             icon: const Icon(Icons.notification_add_outlined),
                           );

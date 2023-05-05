@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
-import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
-import 'package:proto_ikan/model/user_model.dart';
-import 'package:proto_ikan/repository/login_repositories.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../repository/login_repositories.dart';
+import '../auth_bloc/auth_bloc.dart';
+import '../user_bloc/user_bloc.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';

@@ -1,30 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
+
+import '../../bloc/fish/fish_bloc.dart';
 
 class FishDetailWidget extends StatelessWidget {
   const FishDetailWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FishListBloc, FishListState>(
-      bloc: context.read<FishListBloc>(),
-      builder: (context, state) {
-        if (state is FishDetailLoading) {
-          return CircularProgressIndicator();
-        } else if (state is FishDetailLoadSuccess) {
-          final fishDetail = state.fishDetail[0];
-          return Column(
-            children: [
-              Text(fishDetail.berat),
-            ],
-          );
-        } else {
-          return Text('FATAL ERROR (DETAIL FISH)');
-        }
+    return WillPopScope(
+      onWillPop: () async {
+        context.read<FishBloc>().add(GetFish());
+        return true;
       },
+      child: BlocBuilder<FishBloc, FishState>(
+        bloc: context.read<FishBloc>(),
+        builder: (context, state) {
+          if (state is FishLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is FishLoadSuccess) {
+            final fishDetail = state.fish[0];
+            return Column(
+              children: [
+                Text(fishDetail.description[0].berat),
+              ],
+            );
+          } else {
+            return const Text('FATAL ERROR (DETAIL FISH)');
+          }
+        },
+      ),
     );
   }
 }

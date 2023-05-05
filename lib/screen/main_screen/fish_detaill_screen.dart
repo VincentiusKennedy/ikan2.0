@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
-import 'package:proto_ikan/widget/fish_detail_screen_widget/fish_detail_widget.dart';
+
+import '../../bloc/fish/fish_bloc.dart';
+import '../../widget/fish_detail_screen_widget/fish_detail_widget.dart';
 
 class FishDetailScreen extends StatefulWidget {
   final String id;
@@ -23,16 +22,16 @@ class _FishDetailScreen extends State<FishDetailScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<FishListBloc>().add(GetFishDetail(id: id));
+    context.read<FishBloc>().add(GetFishDetail(id: id));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kembali'),
+        title: const Text('Kembali'),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: FishDetailWidget(),
       ),
     );

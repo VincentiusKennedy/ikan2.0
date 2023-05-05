@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
-import 'package:proto_ikan/screen/jadwal_screen.dart';
-import 'package:proto_ikan/screen/main_screen.dart';
 import 'package:skeletons/skeletons.dart';
 
-class FishListWidget extends StatelessWidget {
-  const FishListWidget({super.key});
+import '../../bloc/fish/fish_bloc.dart';
+import '../../screen/bottom_nav_bar_screen.dart';
+
+class FishWidget extends StatelessWidget {
+  const FishWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FishListBloc, FishListState>(
-      bloc: context.read<FishListBloc>(),
+    return BlocBuilder<FishBloc, FishState>(
+      bloc: context.read<FishBloc>(),
       builder: (context, state) {
-        if (state is FishListLoading) {
+        if (state is FishLoading) {
           return ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -40,14 +40,14 @@ class FishListWidget extends StatelessWidget {
               ),
             ),
           );
-        } else if (state is FishListLoadSuccess) {
-          final fishList = state.fishList;
+        } else if (state is FishLoadSuccess) {
+          final fishList = state.fish;
           return ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: fishList.length,
             itemBuilder: ((context, index) {
-              final fish = fishList[index];
+              final fishes = fishList[index];
               return Card(
                 margin: const EdgeInsets.all(12),
                 child: Column(
@@ -58,7 +58,7 @@ class FishListWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: FadeInImage(
                         placeholder: const AssetImage('assets/Placeholder.png'),
-                        image: NetworkImage(fish.picture),
+                        image: NetworkImage(fishes.picture),
                       ),
                     ),
                     Padding(
@@ -67,13 +67,13 @@ class FishListWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            fish.name,
+                            fishes.name,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
-                            fish.status.toUpperCase(),
+                            fishes.status,
                             style: const TextStyle(
                               color: Colors.lightGreen,
                             ),
@@ -91,7 +91,7 @@ class FishListWidget extends StatelessWidget {
                               context,
                               MaterialPageRoute<void>(
                                 builder: (BuildContext context) =>
-                                    const MainScreen(indexScreen: 1),
+                                    const BottomNavBarScreen(indexScreen: 1),
                               ),
                             );
                           },

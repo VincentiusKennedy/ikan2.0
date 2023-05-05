@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proto_ikan/bloc/fish_list/fish_list_bloc.dart';
-import 'package:proto_ikan/screen/fish_detaill.dart';
 import 'package:skeletons/skeletons.dart';
+
+import '../../bloc/fish/fish_bloc.dart';
+import '../../screen/main_screen/fish_detaill_screen.dart';
 
 class JadwalWidget extends StatelessWidget {
   const JadwalWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FishListBloc, FishListState>(
-      bloc: context.read<FishListBloc>(),
+    return BlocBuilder<FishBloc, FishState>(
+      bloc: context.read<FishBloc>(),
       builder: (context, state) {
-        if (state is FishListLoading) {
+        if (state is FishLoading) {
           return ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -39,14 +40,14 @@ class JadwalWidget extends StatelessWidget {
               ),
             ),
           );
-        } else if (state is FishListLoadSuccess) {
-          final fishList = state.fishList;
+        } else if (state is FishLoadSuccess) {
+          final fishes = state.fish;
           return ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: fishList.length,
+            itemCount: fishes.length,
             itemBuilder: ((context, index) {
-              final fish = fishList[index];
+              final fish = fishes[index];
               return Card(
                 margin: const EdgeInsets.all(12),
                 child: Column(

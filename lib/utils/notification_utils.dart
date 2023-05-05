@@ -1,7 +1,8 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:proto_ikan/main.dart';
+
+import '../main.dart';
 
 Future<void> postNotification() async {
   const AndroidNotificationDetails androidNotificationDetails =

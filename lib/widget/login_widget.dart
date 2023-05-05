@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proto_ikan/bloc/login_bloc/login_bloc.dart';
-import 'package:proto_ikan/repository/login_repositories.dart';
+
+import '../bloc/login_bloc/login_bloc.dart';
+import '../repository/login_repositories.dart';
 
 class LoginWidget extends StatefulWidget {
   final UserRepository userRepository;

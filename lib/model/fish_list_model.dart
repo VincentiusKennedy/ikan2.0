@@ -1,14 +1,23 @@
-class FishList {
-  late String name;
-  late String detail;
-  late String picture;
-  late String location;
-  late String date;
-  late int price;
-  late String status;
-  late String id;
+import 'dart:convert';
 
-  FishList({
+List<Fish> fishFromJson(String str) =>
+    List<Fish>.from(json.decode(str).map((x) => Fish.fromJson(x)));
+
+String fishToJson(List<Fish> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+class Fish {
+  String name;
+  String detail;
+  String picture;
+  String location;
+  String date;
+  String price;
+  String status;
+  String id;
+  List<Description> description;
+
+  Fish({
     required this.name,
     required this.detail,
     required this.picture,
@@ -17,29 +26,89 @@ class FishList {
     required this.price,
     required this.status,
     required this.id,
+    required this.description,
   });
 
-  FishList.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    detail = json['detail'];
-    picture = json['picture'];
-    location = json['location'];
-    date = (json['date']);
-    price = json['price'];
-    status = json['status'];
-    id = json['id'];
+  factory Fish.fromJson(Map<String, dynamic> json) {
+    // print(json);
+    return Fish(
+      name: json["name"],
+      detail: json["detail"],
+      picture: json["picture"],
+      location: json["location"],
+      date: json["date"],
+      price: json["price"],
+      status: json["status"],
+      id: json["id"],
+      description: List<Description>.from(
+          json["description"].map((x) => Description.fromJson(x))),
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
-    data['detail'] = detail;
-    data['picture'] = picture;
-    data['location'] = location;
-    data['date'] = date;
-    data['price'] = price;
-    data['status'] = status;
-    data['id'] = id;
-    return data;
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "detail": detail,
+        "picture": picture,
+        "location": location,
+        "date": date,
+        "price": price,
+        "status": status,
+        "id": id,
+        "description": List<dynamic>.from(description.map((x) => x.toJson())),
+      };
+}
+
+class Description {
+  String kondisi;
+  String ukuran;
+  String berat;
+  String potongan;
+  String hargaDasar;
+  String quantity;
+  String totalHarga;
+  String kelipatan;
+  String id;
+  String fishId;
+
+  Description({
+    required this.kondisi,
+    required this.ukuran,
+    required this.berat,
+    required this.potongan,
+    required this.hargaDasar,
+    required this.quantity,
+    required this.totalHarga,
+    required this.kelipatan,
+    required this.id,
+    required this.fishId,
+  });
+
+  factory Description.fromJson(Map<String, dynamic> json) {
+    // print(json);
+    return Description(
+      kondisi: json["kondisi"],
+      ukuran: json["ukuran"],
+      berat: json["berat"],
+      potongan: json["potongan"],
+      hargaDasar: json["hargaDasar"],
+      quantity: json["quantity"],
+      totalHarga: json["totalHarga"],
+      kelipatan: json["kelipatan"],
+      id: json["id"],
+      fishId: json["fishId"],
+    );
   }
+
+  Map<String, dynamic> toJson() => {
+        "kondisi": kondisi,
+        "ukuran": ukuran,
+        "berat": berat,
+        "potongan": potongan,
+        "hargaDasar": hargaDasar,
+        "quantity": quantity,
+        "totalHarga": totalHarga,
+        "kelipatan": kelipatan,
+        "id": id,
+        "fishId": fishId,
+      };
 }

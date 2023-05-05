@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proto_ikan/bloc/auth_bloc/auth_bloc.dart';
-import 'package:proto_ikan/bloc/user_bloc/user_bloc.dart';
-import 'package:proto_ikan/model/user_model.dart';
+
+import '../bloc/auth_bloc/auth_bloc.dart';
+import '../bloc/user_bloc/user_bloc.dart';
+import '../model/user_model.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -41,9 +42,7 @@ class DrawerWidget extends StatelessWidget {
               ],
             );
           } else {
-            return Container(
-              child: const Text('ERROR'),
-            );
+            return const Text('ERROR');
           }
         },
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:proto_ikan/utils/notification_utils.dart';
+
+import '../../utils/notification_utils.dart';
 
 class NotificationTestWidget extends StatelessWidget {
   const NotificationTestWidget({super.key});
