@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/auth_bloc/auth_bloc.dart';
-import '../../widget/account_screen_widget/notification_test_widget.dart';
+import '../../utils/notification_utils.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -20,9 +20,16 @@ class AccountScreen extends StatelessWidget {
               icon: const Icon(Icons.logout))
         ],
       ),
-      body: const Center(
-        child: NotificationTestWidget(),
+      body: Center(
+        child: _buildTestNotifButton(),
       ),
     );
   }
+}
+
+Widget _buildTestNotifButton() {
+  return const ElevatedButton(
+    onPressed: postNotification,
+    child: Text('TEST'),
+  );
 }

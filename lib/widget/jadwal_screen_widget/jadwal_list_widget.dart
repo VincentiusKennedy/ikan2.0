@@ -85,17 +85,25 @@ class JadwalWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text('Harga Dasar : RP.${fish.price} / Kg'),
                     ),
-                    Row(
-                      children: [
-                        const Icon(Icons.location_on_outlined),
-                        Text(fish.location)
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const Icon(Icons.access_time_rounded),
-                        Text(fish.date),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(Icons.location_on_outlined),
+                              Text(fish.location)
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              const Icon(Icons.access_time_rounded),
+                              Text(fish.date),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),

@@ -116,7 +116,7 @@ class FishWidget extends StatelessWidget {
             }),
           );
         } else {
-          return const Text('OWENGOWENGOWENGWOAODJWAOIDHIOAUWSDJHBIAOUWD');
+          return const Text('FATAL ERROR (FISH LIST)');
         }
       },
     );
