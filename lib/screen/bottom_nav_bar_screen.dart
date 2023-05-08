@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proto_ikan/screen/main_screen/history_screen.dart';
 
 import 'main_screen/account_screen.dart';
 import 'main_screen/home_screen.dart';
@@ -21,6 +22,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   final List<Widget> _listWidget = [
     const HomePage(),
     const JadwalScreen(),
+    HistoryScreen(),
     const AccountScreen(),
   ];
 
@@ -32,6 +34,10 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
     const BottomNavigationBarItem(
       icon: Icon(Icons.schedule_outlined),
       label: 'Jadwal',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.history_outlined),
+      label: 'Riwayat',
     ),
     const BottomNavigationBarItem(
       icon: Icon(Icons.manage_accounts_outlined),

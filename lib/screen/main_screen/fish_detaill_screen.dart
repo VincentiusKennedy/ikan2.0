@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proto_ikan/widget/fish_detail_screen_widget/dialog_widget.dart';
 
 import '../../bloc/fish/fish_bloc.dart';
 import '../../widget/fish_detail_screen_widget/fish_detail_widget.dart';
@@ -56,7 +57,7 @@ Widget _buildBottomSheet(BuildContext context, String id) {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (BuildContext context) => _buildDialog(context),
+                  builder: (BuildContext context) => DialogWidget(),
                 );
               },
               style: ButtonStyle(
@@ -75,65 +76,6 @@ Widget _buildBottomSheet(BuildContext context, String id) {
             ),
           ),
         ),
-      ),
-    ),
-  );
-}
-
-Widget _buildDialog(BuildContext context) {
-  String textFieldValue = '';
-  return AlertDialog(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-    content: Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Daftar Lelang',
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: const Icon(Icons.close),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          const Text('Harga Deposit'),
-          const SizedBox(height: 10),
-          TextField(
-            onChanged: (value) {
-              textFieldValue = value;
-            },
-            decoration: const InputDecoration(
-              hintText: 'Harga Deposit',
-              border: OutlineInputBorder(),
-            ),
-          ),
-          const SizedBox(height: 20),
-          const Text(
-              'Salam, terima kasih telah berminat untuk bergabung dalam lelang kami. Untuk Harga depositnya sebesar 1 Juta Rupiah, Apakah anda ingin Melanjutkan Pendaftaran?'),
-          const SizedBox(height: 20),
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  print(textFieldValue);
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Daftar Lelang'),
-              ),
-            ),
-          ),
-        ],
       ),
     ),
   );
